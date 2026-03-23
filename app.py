@@ -12,6 +12,14 @@ from pathlib import Path
 import streamlit as st
 from dotenv import load_dotenv
 
+# Legge la API key sia da .env (locale) sia da st.secrets (Streamlit Cloud) (POST)
+if "GROQ_API_KEY" in st.secrets:
+    os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+else:
+    from dotenv import load_dotenv
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    load_dotenv(os.path.join(BASE_DIR, ".env"))
+
 # Calcola il path assoluto relativo alla posizione di app.py
 BASE_DIR        = os.path.dirname(os.path.abspath(__file__))
 WHEELHOUSE_PATH = os.path.join(BASE_DIR, "core")
