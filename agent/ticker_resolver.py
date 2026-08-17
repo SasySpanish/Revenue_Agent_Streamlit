@@ -109,6 +109,65 @@ KNOWN_TICKERS = {
     
 }
 
+# ---------------------------------------------------------------------------
+# ETF — knowledge base dedicata
+# Nomi/alias comuni -> ticker yfinance. Usata sia per il lookup diretto
+# per nome, sia per costruire i preset "top 10 / top 5" qui sotto.
+# ---------------------------------------------------------------------------
+
+KNOWN_ETFS = {
+    # --- ETF globali / mondiali (quotati US, in USD) ---
+    "vanguard s&p 500": "VOO", "voo": "VOO",
+    "ishares core s&p 500": "IVV", "ivv": "IVV",
+    "spdr s&p 500": "SPY", "spy": "SPY",
+    "vanguard total stock market": "VTI", "vti": "VTI",
+    "invesco qqq": "QQQ", "nasdaq 100 etf": "QQQ", "qqq": "QQQ",
+    "vanguard total world stock": "VT", "vt": "VT",
+    "ishares msci acwi": "ACWI", "acwi": "ACWI",
+    "vanguard ftse developed markets": "VEA", "vea": "VEA",
+    "vanguard ftse emerging markets": "VWO", "vwo": "VWO",
+    "ishares core msci eafe": "IEFA", "iefa": "IEFA",
+    "ishares core msci emerging markets": "IEMG", "iemg": "IEMG",
+    "vanguard total bond market": "BND", "bnd": "BND",
+    "ishares core us aggregate bond": "AGG", "agg": "AGG",
+    "spdr gold shares": "GLD", "gld": "GLD",
+    "ishares gold trust": "IAU", "iau": "IAU",
+    "schwab us dividend equity": "SCHD", "schd": "SCHD",
+    "vanguard high dividend yield": "VYM", "vym": "VYM",
+    "ark innovation": "ARKK", "arkk": "ARKK",
+    "vaneck semiconductor": "SMH", "smh": "SMH",
+    "technology select sector spdr": "XLK", "xlk": "XLK",
+
+    # --- ETF europei (UCITS, quotati su borse europee) ---
+    "vanguard ftse all-world ucits": "VWCE.DE", "vwce": "VWCE.DE",
+    "ishares core msci world ucits (xetra)": "EUNL.DE", "eunl": "EUNL.DE",
+    "ishares core msci world ucits (amsterdam)": "IWDA.AS", "iwda": "IWDA.AS",
+    "ishares core s&p 500 ucits (xetra)": "SXR8.DE", "sxr8": "SXR8.DE",
+    "ishares core s&p 500 ucits (lse)": "CSPX.L", "cspx": "CSPX.L",
+    "vanguard s&p 500 ucits": "VUSA.L", "vusa": "VUSA.L",
+    "ishares stoxx europe 600 ucits": "EXSA.DE", "exsa": "EXSA.DE",
+    "ishares euro stoxx 50 ucits": "EXW1.DE", "exw1": "EXW1.DE",
+    "ishares core msci emerging markets imi ucits": "EIMI.L", "eimi": "EIMI.L",
+    "vanguard ftse emerging markets ucits": "VFEM.L", "vfem": "VFEM.L",
+    "ishares msci world small cap ucits": "IUSN.DE", "iusn": "IUSN.DE",
+    "ishares core msci europe ucits": "IMEU.L", "imeu": "IMEU.L",
+    "ishares physical gold etc": "SGLN.L", "sgln": "SGLN.L",
+    "xtrackers msci world ucits": "XDWD.DE", "xdwd": "XDWD.DE",
+    "amundi msci world ucits": "CW8.PA", "cw8": "CW8.PA",
+
+    # --- ETF italiani / quotati su Borsa Italiana (Milano) ---
+    "ishares core msci world ucits (milano)": "SWDA.MI", "swda": "SWDA.MI",
+    "ishares core s&p 500 ucits (milano)": "CSSPX.MI", "csspx": "CSSPX.MI",
+    "vanguard ftse all-world ucits (milano)": "VWCE.MI",
+    "lyxor ftse mib ucits": "ETFMIB.MI", "etfmib": "ETFMIB.MI",
+    "amundi ftse mib ucits": "FCA1.MI",
+    "ishares ftse mib ucits": "IMIB.MI", "imib": "IMIB.MI",
+    "xtrackers msci world ucits (milano)": "XDWD.MI",
+    "amundi msci emerging markets ucits": "AEEM.MI", "aeem": "AEEM.MI",
+    "ishares euro stoxx 50 ucits (milano)": "EXW1.MI",
+    "lyxor euro stoxx 50": "MSE.MI", "mse": "MSE.MI",
+}
+
 # Settori predefiniti pronti all'uso
 SECTOR_PRESETS = {
     "automotive europeo": {
@@ -244,6 +303,67 @@ SECTOR_PRESETS = {
         "AMP.MI":  {"name": "Amplifon",          "country": "IT", "segment": "healthcare"},
         "REC.MI":  {"name": "Recordati",         "country": "IT", "segment": "pharma"},
     },
+
+    # -----------------------------------------------------------------
+    # ETF — preset "top 10 / top 5" per area geografica
+    # -----------------------------------------------------------------
+    "top 10 etf mondiali": {
+        "VOO":  {"name": "Vanguard S&P 500 ETF",              "country": "US", "segment": "etf_equity_us"},
+        "IVV":  {"name": "iShares Core S&P 500 ETF",          "country": "US", "segment": "etf_equity_us"},
+        "SPY":  {"name": "SPDR S&P 500 ETF Trust",            "country": "US", "segment": "etf_equity_us"},
+        "VTI":  {"name": "Vanguard Total Stock Market ETF",   "country": "US", "segment": "etf_equity_us"},
+        "QQQ":  {"name": "Invesco QQQ Trust (Nasdaq 100)",    "country": "US", "segment": "etf_equity_us"},
+        "VT":   {"name": "Vanguard Total World Stock ETF",    "country": "US", "segment": "etf_equity_global"},
+        "VEA":  {"name": "Vanguard FTSE Developed Markets ETF","country": "US","segment": "etf_equity_intl"},
+        "VWO":  {"name": "Vanguard FTSE Emerging Markets ETF","country": "US", "segment": "etf_equity_em"},
+        "BND":  {"name": "Vanguard Total Bond Market ETF",    "country": "US", "segment": "etf_bond"},
+        "GLD":  {"name": "SPDR Gold Shares",                  "country": "US", "segment": "etf_commodity"},
+    },
+    "top 5 etf mondiali": {
+        "VOO":  {"name": "Vanguard S&P 500 ETF",            "country": "US", "segment": "etf_equity_us"},
+        "IVV":  {"name": "iShares Core S&P 500 ETF",        "country": "US", "segment": "etf_equity_us"},
+        "SPY":  {"name": "SPDR S&P 500 ETF Trust",          "country": "US", "segment": "etf_equity_us"},
+        "VTI":  {"name": "Vanguard Total Stock Market ETF", "country": "US", "segment": "etf_equity_us"},
+        "QQQ":  {"name": "Invesco QQQ Trust (Nasdaq 100)",  "country": "US", "segment": "etf_equity_us"},
+    },
+    "top 10 etf europei": {
+        "VWCE.DE": {"name": "Vanguard FTSE All-World UCITS ETF (Acc)",     "country": "EU", "segment": "etf_equity_global"},
+        "EUNL.DE": {"name": "iShares Core MSCI World UCITS ETF",          "country": "EU", "segment": "etf_equity_global"},
+        "IWDA.AS": {"name": "iShares Core MSCI World UCITS ETF (AS)",     "country": "EU", "segment": "etf_equity_global"},
+        "SXR8.DE": {"name": "iShares Core S&P 500 UCITS ETF",             "country": "EU", "segment": "etf_equity_us"},
+        "CSPX.L":  {"name": "iShares Core S&P 500 UCITS ETF (LSE)",       "country": "EU", "segment": "etf_equity_us"},
+        "VUSA.L":  {"name": "Vanguard S&P 500 UCITS ETF",                 "country": "EU", "segment": "etf_equity_us"},
+        "EXSA.DE": {"name": "iShares STOXX Europe 600 UCITS ETF",         "country": "EU", "segment": "etf_equity_europe"},
+        "EXW1.DE": {"name": "iShares EURO STOXX 50 UCITS ETF",            "country": "EU", "segment": "etf_equity_europe"},
+        "EIMI.L":  {"name": "iShares Core MSCI EM IMI UCITS ETF",         "country": "EU", "segment": "etf_equity_em"},
+        "IUSN.DE": {"name": "iShares MSCI World Small Cap UCITS ETF",     "country": "EU", "segment": "etf_equity_global"},
+    },
+    "top 5 etf europei": {
+        "VWCE.DE": {"name": "Vanguard FTSE All-World UCITS ETF (Acc)", "country": "EU", "segment": "etf_equity_global"},
+        "EUNL.DE": {"name": "iShares Core MSCI World UCITS ETF",      "country": "EU", "segment": "etf_equity_global"},
+        "SXR8.DE": {"name": "iShares Core S&P 500 UCITS ETF",         "country": "EU", "segment": "etf_equity_us"},
+        "CSPX.L":  {"name": "iShares Core S&P 500 UCITS ETF (LSE)",   "country": "EU", "segment": "etf_equity_us"},
+        "EXSA.DE": {"name": "iShares STOXX Europe 600 UCITS ETF",     "country": "EU", "segment": "etf_equity_europe"},
+    },
+    "top 10 etf italiani": {
+        "SWDA.MI":   {"name": "iShares Core MSCI World UCITS ETF (Milano)", "country": "IT", "segment": "etf_equity_global"},
+        "CSSPX.MI":  {"name": "iShares Core S&P 500 UCITS ETF (Milano)",    "country": "IT", "segment": "etf_equity_us"},
+        "VWCE.MI":   {"name": "Vanguard FTSE All-World UCITS ETF (Milano)", "country": "IT", "segment": "etf_equity_global"},
+        "ETFMIB.MI": {"name": "Lyxor FTSE MIB UCITS ETF",                   "country": "IT", "segment": "etf_equity_italy"},
+        "FCA1.MI":   {"name": "Amundi FTSE MIB UCITS ETF",                  "country": "IT", "segment": "etf_equity_italy"},
+        "IMIB.MI":   {"name": "iShares FTSE MIB UCITS ETF",                 "country": "IT", "segment": "etf_equity_italy"},
+        "XDWD.MI":   {"name": "Xtrackers MSCI World UCITS ETF (Milano)",    "country": "IT", "segment": "etf_equity_global"},
+        "AEEM.MI":   {"name": "Amundi MSCI Emerging Markets UCITS ETF",     "country": "IT", "segment": "etf_equity_em"},
+        "EXW1.MI":   {"name": "iShares EURO STOXX 50 UCITS ETF (Milano)",   "country": "IT", "segment": "etf_equity_europe"},
+        "MSE.MI":    {"name": "Lyxor EURO STOXX 50 UCITS ETF",              "country": "IT", "segment": "etf_equity_europe"},
+    },
+    "top 5 etf italiani": {
+        "SWDA.MI":   {"name": "iShares Core MSCI World UCITS ETF (Milano)", "country": "IT", "segment": "etf_equity_global"},
+        "CSSPX.MI":  {"name": "iShares Core S&P 500 UCITS ETF (Milano)",    "country": "IT", "segment": "etf_equity_us"},
+        "VWCE.MI":   {"name": "Vanguard FTSE All-World UCITS ETF (Milano)", "country": "IT", "segment": "etf_equity_global"},
+        "ETFMIB.MI": {"name": "Lyxor FTSE MIB UCITS ETF",                   "country": "IT", "segment": "etf_equity_italy"},
+        "IMIB.MI":   {"name": "iShares FTSE MIB UCITS ETF",                 "country": "IT", "segment": "etf_equity_italy"},
+    },
 }
 
 
@@ -281,6 +401,34 @@ SECTOR_ALIASES = {
     "italian":          "ftse mib",
     "italy":            "ftse mib",
     "mib":              "ftse mib",
+
+    # --- alias ETF ---
+    # NB: gli alias con "top 5" vanno controllati PRIMA di quelli generici
+    # ("etf mondiali" è contenuto anche in "top 5 etf mondiali"), quindi
+    # in resolve_from_text il match esatto sul preset (step 2) ha comunque
+    # priorità e risolve l'ambiguità quando l'utente scrive la frase intera.
+    "top 5 etf mondiali":  "top 5 etf mondiali",
+    "top5 etf mondiali":   "top 5 etf mondiali",
+    "5 migliori etf mondiali": "top 5 etf mondiali",
+    "world etf top 5":     "top 5 etf mondiali",
+    "top 5 etf europei":   "top 5 etf europei",
+    "top5 etf europei":    "top 5 etf europei",
+    "5 migliori etf europei": "top 5 etf europei",
+    "top 5 etf italiani":  "top 5 etf italiani",
+    "top5 etf italiani":   "top 5 etf italiani",
+    "5 migliori etf italiani": "top 5 etf italiani",
+
+    "etf mondiali":         "top 10 etf mondiali",
+    "etf globali":          "top 10 etf mondiali",
+    "world etf":            "top 10 etf mondiali",
+    "global etf":           "top 10 etf mondiali",
+    "etf europei":          "top 10 etf europei",
+    "european etf":         "top 10 etf europei",
+    "etf ucits":            "top 10 etf europei",
+    "etf italiani":         "top 10 etf italiani",
+    "italian etf":          "top 10 etf italiani",
+    "etf borsa italiana":   "top 10 etf italiani",
+    "etf piazza affari":    "top 10 etf italiani",
 }
 
 
@@ -331,25 +479,30 @@ def resolve_tickers(raw_list: list[str]) -> dict:
 def resolve_from_text(text: str) -> dict:
     """
     Prova a risolvere ticker da testo libero usando la knowledge base.
-    Controlla prima gli alias, poi i preset diretti, poi i nomi singoli.
+    Controlla prima gli alias, poi i preset diretti, poi i nomi singoli
+    (azioni e, ora, anche ETF).
     """
     text_lower = text.lower()
 
     # 1. Controlla alias (EN/IT) → preset canonico
-    for alias, canonical in SECTOR_ALIASES.items():
+    #    Ordina gli alias per lunghezza decrescente così le frasi più
+    #    specifiche ("top 5 etf mondiali") vengono controllate prima di
+    #    quelle generiche ("etf mondiali") e non vengono "coperte" per errore.
+    for alias in sorted(SECTOR_ALIASES.keys(), key=len, reverse=True):
+        canonical = SECTOR_ALIASES[alias]
         if alias in text_lower and canonical in SECTOR_PRESETS:
             print(f"  Preset trovato via alias '{alias}': '{canonical}'")
             return SECTOR_PRESETS[canonical]
 
-    # 2. Controlla preset diretti (chiave esatta)
-    for sector_key, preset in SECTOR_PRESETS.items():
+    # 2. Controlla preset diretti (chiave esatta), più lunghi prima
+    for sector_key in sorted(SECTOR_PRESETS.keys(), key=len, reverse=True):
         if sector_key in text_lower:
             print(f"  Preset trovato: '{sector_key}'")
-            return preset
+            return SECTOR_PRESETS[sector_key]
 
-    # 3. Fallback — cerca nomi singoli nella knowledge base
+    # 3. Fallback — cerca nomi singoli nella knowledge base (azioni + ETF)
     found = {}
-    for name, symbol in KNOWN_TICKERS.items():
+    for name, symbol in {**KNOWN_TICKERS, **KNOWN_ETFS}.items():
         if name in text_lower and symbol not in found:
             meta = validate_ticker(symbol)
             if meta:
@@ -367,9 +520,10 @@ def ticker_resolver_tool(query: str) -> str:
     """
     Risolve una query testuale in una lista di ticker finanziari validi.
 
-    Usa questo tool quando l'utente descrive aziende o settori in linguaggio
-    naturale (es. 'i principali OEM europei', 'le banche italiane',
-    'Apple e Microsoft').
+    Usa questo tool quando l'utente descrive aziende, settori o gruppi di
+    ETF in linguaggio naturale (es. 'i principali OEM europei', 'le banche
+    italiane', 'Apple e Microsoft', 'top 10 etf mondiali', 'top 5 etf
+    italiani', 'i migliori etf europei').
 
     Restituisce una stringa JSON con i ticker validi trovati.
     """
@@ -377,7 +531,7 @@ def ticker_resolver_tool(query: str) -> str:
 
     print(f"\n[ticker_resolver] Query: '{query}'")
 
-    # 1. Prova match diretto con preset di settore
+    # 1. Prova match diretto con preset di settore o ETF
     result = resolve_from_text(query)
     if result:
         print(f"  Risolti {len(result)} ticker dalla knowledge base")
@@ -397,7 +551,7 @@ def ticker_resolver_tool(query: str) -> str:
         "message": (
             f"Nessun ticker trovato per '{query}'. "
             "Fornisci i simboli di borsa direttamente "
-            "(es. 'BMW.DE', 'AAPL', 'UCG.MI')."
+            "(es. 'BMW.DE', 'AAPL', 'UCG.MI', 'VWCE.DE')."
         ),
     })
 
@@ -408,7 +562,7 @@ def validate_custom_tickers_tool(ticker_list: str) -> str:
     Valida una lista di ticker forniti direttamente dall'utente.
 
     Usa questo tool quando l'utente fornisce simboli di borsa espliciti
-    (es. 'BMW.DE, AAPL, UCG.MI').
+    (es. 'BMW.DE, AAPL, UCG.MI' oppure 'VWCE.DE, SWDA.MI, VOO').
 
     Input: stringa con ticker separati da virgola.
     Restituisce: JSON con ticker validi e non validi.
